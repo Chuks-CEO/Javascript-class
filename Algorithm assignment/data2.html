@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dot Product and Orthogonality</title>
+</head>
+<body>
+  <h2>Dot Product and Orthogonality Checker</h2>
+
+  <button onclick="checkOrthogonality()">Check Vectors</button>
+  <div id="output"></div>
+
+  <script>
+    // Step 1: Procedure version (modifies external variable `ps`)
+    function dot_product_procedure(v1, v2, ps) {
+      ps.value = 0;
+      for (let i = 0; i < v1.length; i++) {
+        ps.value += v1[i] * v2[i];
+      }
+    }
+
+    // Step 2: Use the procedure to check orthogonality
+    function checkOrthogonality() {
+      let output = document.getElementById("output");
+      output.innerHTML = "";
+
+      // Example list of vector pairs
+      let vectorPairs = [
+        {v1: [1, 2], v2: [-2, 1]},    // orthogonal
+        {v1: [3, 4], v2: [5, 6]},     // not orthogonal
+        {v1: [0, 1], v2: [0, 0]},     // orthogonal
+      ];
+
+      output.innerHTML += "<h4>Using procedure version:</h4>";
+      for (let i = 0; i < vectorPairs.length; i++) {
+        let ps = { value: 0 };
+        dot_product_procedure(vectorPairs[i].v1, vectorPairs[i].v2, ps);
+        let result = ps.value === 0 ? "Orthogonal" : "Not Orthogonal";
+        output.innerHTML += `Pair ${i + 1}: Dot Product = ${ps.value}, ${result}<br>`;
+      }
+
+      // Step 3: Function version (returns result)
+      output.innerHTML += "<br><h4>Using function version:</h4>";
+      for (let i = 0; i < vectorPairs.length; i++) {
+        let dp = dot_product_function(vectorPairs[i].v1, vectorPairs[i].v2);
+        let result = dp === 0 ? "Orthogonal" : "Not Orthogonal";
+        output.innerHTML += `Pair ${i + 1}: Dot Product = ${dp}, ${result}<br>`;
+      }
+    }
+
+    // Step 3: Function version (returns the dot product)
+    function dot_product_function(v1, v2) {
+      let sum = 0;
+      for (let i = 0; i < v1.length; i++) {
+        sum += v1[i] * v2[i];
+      }
+      return sum;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sum of Distinct Elements</title>
+</head>
+<body>
+  <h2>Sum of Distinct Elements from Two Arrays</h2>
+
+  <p>Set 1: [3, 1, 7, 9]</p>
+  <p>Set 2: [2, 4, 1, 9, 3]</p>
+
+  <button onclick="calculateDistinctSum()">Calculate</button>
+
+  <p id="result"></p>
+
+  <script>
+    function calculateDistinctSum() {
+      let set1 = [3, 1, 7, 9];
+      let set2 = [2, 4, 1, 9, 3];
+      let result = 0;
+
+      let allValues = set1.concat(set2);
+
+      for (let value of allValues) {
+        let inSet1 = set1.includes(value);
+        let inSet2 = set2.includes(value);
+
+        if (inSet1 && inSet2) {
+          continue; 
+        } else {
+          result += value;
+        }
+      }
+
+      document.getElementById("result").textContent = "Sum of distinct elements: " + result;
+    }
+  </script>
+</body>
+</html>

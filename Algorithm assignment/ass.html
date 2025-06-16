@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sentence Analyzer</title>
+</head>
+<body>
+  <h2>Sentence Analyzer</h2>
+  <input type="text" id="sentenceInput" placeholder="Enter a sentence ending with a period (.)" style="width: 300px;">
+  <button onclick="analyzeSentence()">Analyze</button>
+
+  <p id="charCount"></p>
+  <p id="wordCount"></p>
+  <p id="vowelCount"></p>
+
+  <script>
+    function analyzeSentence() {
+      var sentence = document.getElementById("sentenceInput").value;
+
+      if (!sentence.endsWith('.')) {
+        alert("Please end the sentence with a period.");
+        return;
+      }
+
+      let charCount = 0;
+      let wordCount = 0;
+      let vowelCount = 0;
+      const vowels = ['a', 'e', 'i', 'o', 'u'];
+
+      // Read character by character
+      for (let i = 0; i < sentence.length; i++) {
+        let ch = sentence[i];
+        if (ch.match(/[a-zA-Z. ]/)) {
+          charCount++;
+        }
+        if (vowels.includes(ch.toLowerCase())) {
+          vowelCount++;
+        }
+      }
+
+      // Count words based on spaces (remove the ending period first)
+      const trimmedSentence = sentence.slice(0, -1); // remove the period
+      const words = trimmedSentence.trim().split(" ");
+      wordCount = words.length;
+
+      // Output results
+      document.getElementById("charCount").textContent = "Characters: " + charCount;
+      document.getElementById("wordCount").textContent = "Words: " + wordCount;
+      document.getElementById("vowelCount").textContent = "Vowels: " + vowelCount;
+    }
+  </script>
+</body>
+</html>
